@@ -1,10 +1,10 @@
 
 <div class="payment-container" *ngIf="bookingData as data">
-  <h2>Payment for {{ data.movieInfo?.title }}</h2>
+  <h2>Payment for {{ data.movieInfo.title }}</h2>
   <div class="summary-card">
     <h3>Booking Summary</h3>
-    <div class="summary-row"><span>Movie:</span> <span>{{ data.movieInfo?.title }}</span></div>
-    <div class="summary-row"><span>Showtime:</span> <span>{{ data.movieInfo?.showTime }}</span></div>
+    <div class="summary-row"><span>Movie:</span> <span>{{ data.movieInfo.title }}</span></div>
+    <div class="summary-row"><span>Showtime:</span> <span>{{ data.movieInfo.showTime }}</span></div>
     <div class="summary-row"><span>Seats:</span> <span>{{ selectedSeatIds }}</span></div>
     <div class="summary-row"><span>Total:</span> <span>₹{{ totalAmount }}</span></div>
   </div>
