@@ -1,0 +1,170 @@
+<div class="movie-admin">
+  <div class="header">
+    <h2>🎬 Movie Management</h2>
+    <button class="add-movie-btn" (click)="openAddMovieModal()">
+      <span class="icon">+</span>
+      Add New Movie
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading movies...</p>
+  </div>
+
+  <!-- Movies Grid -->
+  <div class="movies-grid" *ngIf="!isLoading">
+    <div *ngFor="let movie of movies" class="movie-card">
+      <div class="poster" *ngIf="detailedMovies[movie.imdbID]?.Poster">
+        <img [src]="detailedMovies[movie.imdbID]?.Poster" alt="Movie Poster" />
+        <div class="overlay">
+          <div class="rating" *ngIf="detailedMovies[movie.imdbID]?.imdbRating">
+            ⭐ {{ detailedMovies[movie.imdbID]?.imdbRating }}
+          </div>
+        </div>
+      </div>
+      
+      <div class="movie-info">
+        <h3 class="movie-title">{{ detailedMovies[movie.imdbID]?.Title || movie.imdbID }}</h3>
+        <p class="genre">{{ detailedMovies[movie.imdbID]?.Genre }}</p>
+        <p class="year">{{ detailedMovies[movie.imdbID]?.Year }}</p>
+        
+        <div class="details">
+          <div class="detail-item">
+            <span class="label">Languages:</span>
+            <span class="value">{{ movie.languages.join(', ') }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Certificate:</span>
+            <span class="value certificate">{{ movie.certificate }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Price Range:</span>
+            <span class="value price">₹{{ movie.priceRange }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Release Date:</span>
+            <span class="value">{{ movie.releaseDate | date:'MMM dd, yyyy' }}</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="actions">
+        <button class="edit-btn" (click)="editMovie(movie)" title="Edit Movie">
+          <span class="icon">✏️</span>
+          Edit
+        </button>
+        <button class="delete-btn" (click)="deleteMovie(movie._id)" title="Delete Movie">
+          <span class="icon">🗑️</span>
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!isLoading && movies.length === 0" class="empty-state">
+    <div class="empty-icon">🎬</div>
+    <h3>No Movies Found</h3>
+    <p>Start by adding your first movie to the collection</p>
+    <button class="add-movie-btn" (click)="openAddMovieModal()">
+      <span class="icon">+</span>
+      Add Your First Movie
+    </button>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" [class.active]="showModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3>{{ isEditing ? '✏️ Edit Movie' : '➕ Add New Movie' }}</h3>
+        <button class="close-btn" (click)="closeModal()">×</button>
+      </div>
+
+      <form class="movie-form" (ngSubmit)="addOrUpdateMovie()">
+        <div class="form-group">
+          <label for="imdbID">IMDb ID *</label>
+          <input 
+            id="imdbID"
+            type="text" 
+            [(ngModel)]="imdbID" 
+            name="imdbID"
+            placeholder="Enter IMDb ID (e.g., tt4154796)" 
+            required
+            class="form-input"
+          />
+          <small class="form-hint">You can find this in the IMDb URL</small>
+        </div>
+
+        <div class="form-group">
+          <label>Languages *</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item" *ngFor="let lang of availableLanguages">
+              <input 
+                type="checkbox" 
+                [value]="lang" 
+                [checked]="selectedLanguages.includes(lang)"
+                (change)="onLanguageChange($event, lang)"
+              />
+              <span class="checkmark"></span>
+              {{ lang }}
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="certificate">Certificate *</label>
+          <select 
+            id="certificate"
+            [(ngModel)]="certificate" 
+            name="certificate"
+            required
+            class="form-select"
+          >
+            <option value="">Select Certificate</option>
+            <option value="U">U (Universal)</option>
+            <option value="U/A">U/A (Parental Guidance)</option>
+            <option value="A">A (Adult)</option>
+            <option value="S">S (Restricted)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="priceRange">Price Range *</label>
+          <input 
+            id="priceRange"
+            type="text" 
+            [(ngModel)]="priceRange" 
+            name="priceRange"
+            placeholder="e.g., 150-300" 
+            required
+            class="form-input"
+          />
+          <small class="form-hint">Format: minimum-maximum (e.g., 150-300)</small>
+        </div>
+
+        <div class="form-group">
+          <label for="releaseDate">Release Date *</label>
+          <input 
+            id="releaseDate"
+            type="date" 
+            [(ngModel)]="releaseDate" 
+            name="releaseDate"
+            required
+            class="form-input date-input"
+          />
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="cancel-btn" (click)="closeModal()">
+            Cancel
+          </button>
+          <button type="submit" class="submit-btn">
+            {{ isEditing ? 'Update Movie' : 'Add Movie' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

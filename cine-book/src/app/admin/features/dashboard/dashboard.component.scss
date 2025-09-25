@@ -1,0 +1,48 @@
+.poster-img {
+  width: 50px;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Scrollbar styling */
+.table-responsive::-webkit-scrollbar {
+  width: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+/* Hover effect */
+.table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Status badges */
+.badge {
+  font-size: 0.8rem;
+  padding: 0.4em 0.6em;
+}
+
+/* Card styling */
+.card {
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+.poster-img {
+  width: 60px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+}
+
+.card.bg-primary {
+  background-color: #007bff !important;
+}

@@ -1,0 +1,152 @@
+<!-- seat-booking.component.html -->
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <div class="movie-info">
+      <div class="movie-poster">
+        <img
+          *ngIf="movieInfo.poster; else noPoster"
+          [src]="movieInfo.poster"
+          [alt]="movieInfo.title + ' Poster'"
+          class="movie-poster-img"
+        />
+        <ng-template #noPoster>
+          <span style="font-size: 48px; display: inline-block; line-height: 64px;">🎬</span>
+        </ng-template>
+      </div>
+
+      <div class="movie-details">
+        <h1>{{ movieInfo.title }}</h1>
+        <div class="movie-meta">
+          <span>{{ movieInfo.genre }}</span>
+          <span>•</span>
+          <span>{{ movieInfo.duration }}</span>
+          <span>•</span>
+          <span>{{ movieInfo.rating }}</span>
+        </div>
+        <div class="show-info">
+          <span class="info-badge">{{ movieInfo.showTime }}</span>
+          <span class="info-badge">{{ movieInfo.screen }}</span>
+          <span class="info-badge">{{ movieInfo.theater }}</span>
+          <span class="info-badge">{{ movieInfo.audio }}</span>
+        </div>
+      </div>
+    </div>
+    <button class="back-btn" (click)="onBackToMovies()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+      </svg>
+      Back to Movies
+    </button>
+  </div>
+
+  <div class="booking-container">
+    <!-- Theater Section -->
+    <div class="theater-section">
+      <!-- Screen -->
+      <div class="screen-area">
+        <div class="screen"></div>
+        <div class="screen-label">SCREEN</div>
+      </div>
+
+      <!-- Seat Categories -->
+      <div class="seat-categories">
+        <div class="category" *ngFor="let category of seatCategories">
+          <div class="category-name">{{ category.name }}</div>
+          <div class="category-price">₹{{ category.price }}</div>
+        </div>
+      </div>
+
+      <!-- Seating Grid -->
+      <div class="seating-grid">
+        <div class="row" *ngFor="let row of getRows()">
+          <div class="row-label">{{ row }}</div>
+          <div class="seats">
+            <div 
+              *ngFor="let seat of getSeatsByRow(row)" 
+              [class]="getSeatClass(seat)"
+              [class.aisle-right]="shouldAddAisleSpacing(seat.number) && seat.number === 3"
+              [class.aisle-left]="shouldAddAisleSpacing(seat.number) && seat.number === 6"
+              (click)="onSeatClick(seat)"
+              [attr.data-seat]="seat.id"
+              [attr.data-price]="seat.price">
+              {{ seat.number }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-seat available"></div>
+          Available
+        </div>
+        <div class="legend-item">
+          <div class="legend-seat selected"></div>
+          Selected
+        </div>
+        <div class="legend-item">
+          <div class="legend-seat occupied"></div>
+          Occupied
+        </div>
+        <div class="legend-item">
+          <div class="legend-seat premium">
+            <span class="premium-star">★</span>
+          </div>
+          Premium (+₹{{ premiumPriceAdd }})
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Panel -->
+    <div class="booking-panel">
+      <h3>Booking Summary</h3>
+      
+      <div class="selected-seats">
+        <h4>Selected Seats</h4>
+        <div class="seat-list">
+          <div *ngIf="selectedSeats.length === 0" class="no-seats">
+            No seats selected
+          </div>
+          <div 
+            *ngFor="let seat of selectedSeats" 
+            class="seat-tag">
+            {{ seat.id }} 
+            <span class="seat-price">(₹{{ seat.price }})</span>
+            <span class="remove-seat" (click)="removeSeat(seat.id)">&times;</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-breakdown">
+        <div class="price-row">
+          <span>Tickets ({{ selectedSeats.length }})</span>
+          <span>₹{{ totalPrice }}</span>
+        </div>
+        <div class="price-row">
+          <span>Convenience Fee</span>
+          <span>₹{{ getConvenienceFee() }}</span>
+        </div>
+        <div class="price-row">
+          <span>GST (18%)</span>
+          <span>₹{{ getGST() }}</span>
+        </div>
+        <div class="price-row total">
+          <span>Total Amount</span>
+          <span>₹{{ getTotalAmount() }}</span>
+        </div>
+      </div>
+
+      <button 
+        class="book-button" 
+        [disabled]="selectedSeats.length === 0"
+        (click)="onProceedToPayment()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+        Proceed to Payment
+      </button>
+    </div>
+  </div>
+</div>

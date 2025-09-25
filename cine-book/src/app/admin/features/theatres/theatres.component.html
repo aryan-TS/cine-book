@@ -1,0 +1,57 @@
+<div class="theatre-admin">
+  <h2>🎭 Theatre Management</h2>
+
+  <!-- Add/Edit Form -->
+  <div class="form-section">
+    <h3>{{ isEditing ? 'Edit Theatre' : 'Add New Theatre' }}</h3>
+
+    <label>Theatre Name</label>
+    <input [(ngModel)]="name" placeholder="Enter theatre name" />
+
+    <label>Location</label>
+    <input [(ngModel)]="location" placeholder="Enter location" />
+
+    <div class="screens-section">
+      <h4>Screens</h4>
+      <div *ngFor="let screen of screens; let i = index" class="screen-row">
+        <span>Screen {{ screen.screenNumber }}:</span>
+        <input
+          type="number"
+          [(ngModel)]="screen.capacity"
+          placeholder="Capacity"
+        />
+        <button (click)="removeScreen(i)" *ngIf="screens.length > 1">❌</button>
+      </div>
+      <button (click)="addScreen()">➕ Add Screen</button>
+    </div>
+
+    <button (click)="addOrUpdateTheatre()">
+      {{ isEditing ? 'Update Theatre' : 'Add Theatre' }}
+    </button>
+    <button *ngIf="isEditing" class="cancel-btn" (click)="resetForm()">
+      Cancel
+    </button>
+  </div>
+
+  <!-- Theatres List -->
+  <div class="theatres-grid">
+    <div *ngFor="let theatre of theatres" class="theatre-card">
+      <div class="info">
+        <h4>{{ theatre.name }}</h4>
+        <p><strong>Location:</strong> {{ theatre.location }}</p>
+        <p><strong>Screens:</strong></p>
+        <ul>
+          <li *ngFor="let s of theatre.screens">
+            Screen {{ s.screenNumber }} - Capacity: {{ s.capacity }}
+          </li>
+        </ul>
+      </div>
+      <div class="actions">
+        <button class="edit-btn" (click)="editTheatre(theatre)">✏️ Edit</button>
+        <button class="delete-btn" (click)="deleteTheatre(theatre._id)">
+          🗑️ Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

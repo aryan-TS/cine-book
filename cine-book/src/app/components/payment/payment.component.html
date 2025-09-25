@@ -1,0 +1,51 @@
+
+<div class="payment-container" *ngIf="bookingData as data">
+  <h2>Payment for {{ data.movieInfo?.title }}</h2>
+  <div class="summary-card">
+    <h3>Booking Summary</h3>
+    <div class="summary-row"><span>Movie:</span> <span>{{ data.movieInfo?.title }}</span></div>
+    <div class="summary-row"><span>Showtime:</span> <span>{{ data.movieInfo?.showTime }}</span></div>
+    <div class="summary-row"><span>Seats:</span> <span>{{ selectedSeatIds }}</span></div>
+    <div class="summary-row"><span>Total:</span> <span>₹{{ totalAmount }}</span></div>
+  </div>
+
+  <div class="payment-methods" *ngIf="!paymentSuccess">
+    <h3>Select Payment Method</h3>
+    <div class="methods">
+      <label><input type="radio" name="method" value="card" [(ngModel)]="paymentMethod"> Card</label>
+      <label><input type="radio" name="method" value="upi" [(ngModel)]="paymentMethod"> UPI</label>
+      <label><input type="radio" name="method" value="netbanking" [(ngModel)]="paymentMethod"> Netbanking</label>
+    </div>
+
+    <form (ngSubmit)="pay()" #payForm="ngForm" autocomplete="off">
+      <div *ngIf="paymentMethod === 'card'" class="pay-form">
+        <input type="text" placeholder="Card Number" [(ngModel)]="cardDetails.number" name="cardNumber" required maxlength="19">
+        <input type="text" placeholder="Name on Card" [(ngModel)]="cardDetails.name" name="cardName" required>
+        <input type="text" placeholder="MM/YY" [(ngModel)]="cardDetails.expiry" name="expiry" required maxlength="5">
+        <input type="password" placeholder="CVV" [(ngModel)]="cardDetails.cvv" name="cvv" required maxlength="4">
+      </div>
+      <div *ngIf="paymentMethod === 'upi'" class="pay-form">
+        <input type="text" placeholder="UPI ID" [(ngModel)]="upiId" name="upiId" required>
+      </div>
+      <div *ngIf="paymentMethod === 'netbanking'" class="pay-form">
+        <input type="text" placeholder="Bank Name" [(ngModel)]="netbankingBank" name="bank" required>
+      </div>
+      <button class="pay-btn" type="submit">Pay ₹{{ totalAmount }}</button>
+    </form>
+  </div>
+
+  <div class="ticket-success" *ngIf="paymentSuccess">
+    <h3>Payment Successful!</h3>
+    <div class="ticket-card">
+      <h4>Your Ticket</h4>
+      <div><strong>Ticket ID:</strong> {{ ticketId }}</div>
+      <div><strong>Movie:</strong> {{ movieTitle }}</div>
+      <div><strong>Showtime:</strong> {{ showTime }}</div>
+      <div><strong>Seats:</strong> {{ selectedSeatIds }}</div>
+      <div><strong>Screen:</strong> {{ screen }}</div>
+      <div><strong>Total Paid:</strong> ₹{{ totalAmount }}</div>
+    </div>
+    <button class="home-btn" (click)="downloadTicket()">Download Ticket</button>
+    <button class="home-btn" (click)="goToHome()">Back to Home</button>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="shows-admin">
+  <h2>🎟️ Show Management</h2>
+
+  <!-- Add/Edit Form -->
+  <div class="form-section">
+    <h3>{{ isEditing ? 'Edit Show' : 'Add New Show' }}</h3>
+
+    <label>Movie</label>
+    <select [(ngModel)]="movieId">
+      <option value="">-- Select Movie --</option>
+      <!-- Send imdbID so backend stores consistent identifier -->
+      <option *ngFor="let movie of movies" [value]="movie.imdbID">{{ movie.imdbID }}</option>
+    </select>
+
+    <label>Theatre</label>
+    <select [(ngModel)]="theatreId" (change)="onTheatreChange()">
+      <option value="">-- Select Theatre --</option>
+      <option *ngFor="let theatre of theatres" [value]="theatre._id">
+        {{ theatre.name }} ({{ theatre.location }})
+      </option>
+    </select>
+
+    <label>Screen</label>
+    <select [(ngModel)]="screenNumber">
+      <option [ngValue]="null" value="">-- Select Screen --</option>
+      <option *ngFor="let screen of selectedTheatreScreens" [ngValue]="screen.screenNumber">
+        Screen {{ screen.screenNumber }} (Capacity: {{ screen.capacity }})
+      </option>
+    </select>
+
+    <label>Showtime</label>
+    <input type="datetime-local" [(ngModel)]="showtime" />
+
+    <label>Price</label>
+    <input type="number" [(ngModel)]="price" placeholder="Ticket Price" />
+
+    <div class="form-actions">
+      <button (click)="addOrUpdateShow()">
+        {{ isEditing ? 'Update Show' : 'Add Show' }}
+      </button>
+      <button *ngIf="isEditing" class="cancel-btn" (click)="resetForm()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Shows Grid -->
+  <div class="shows-grid">
+    <div *ngFor="let show of shows" class="show-card">
+      <h4>🎬 {{ getMovieTitle(show) }}</h4>
+      <p><strong>Theatre:</strong> {{ getTheatreName(show) }}</p>
+      <p><strong>Screen:</strong> {{ show.screenNumber }}</p>
+      <p><strong>Showtime:</strong> {{ show.showtime | date: 'short' }}</p>
+      <p><strong>Price:</strong> ₹{{ show.price }}</p>
+      <div class="actions">
+        <button class="edit-btn" (click)="editShow(show)">✏️ Edit</button>
+        <button class="delete-btn" (click)="deleteShow(show._id)">🗑️ Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

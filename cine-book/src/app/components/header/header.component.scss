@@ -1,0 +1,72 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1e293b; // Dark blue background
+  padding: 16px 24px;
+  color: white;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: bold;
+
+  .cine {
+    background: linear-gradient(to right, #facc15, #f97316, #ef4444);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .book {
+    color: white;
+  }
+}
+
+  .search {
+    flex: 1;
+    margin: 0 2rem;
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    input {
+      font-size: 0.95rem;
+    }
+
+    .search-icon {
+      color: #000 !important; // search icon in black
+      font-size: 22px;
+    }
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+      color: #666;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      min-width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: transparent;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.05); // light hover effect
+      }
+    }
+
+    .profile-icon {
+      font-size: 26px; // slightly larger than search icon
+      color: #666; // grey for contrast
+    }
+  }
+

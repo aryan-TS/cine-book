@@ -1,0 +1,78 @@
+<div class="container my-4">
+
+  <!-- Status Cards -->
+  <div class="row g-3 mb-4">
+    <div class="col-sm-6 col-md-4" *ngFor="let card of statusCards">
+      <div class="card text-white bg-primary h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ card.title }}</h5>
+          <p class="card-text display-6">{{ card.value }}</p>
+          <small class="text-light">{{ card.description }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Movies Table -->
+  <h4 class="mb-3">Recent Movies</h4>
+  <div class="table-responsive mb-4" style="max-height: 400px; overflow-y: auto;">
+    <table class="table table-bordered table-hover align-middle">
+      <thead class="table-light sticky-top bg-white">
+        <tr>
+          <th>Poster</th>
+          <th>IMDb ID</th>
+          <th>Languages</th>
+          <th>Certificate</th>
+          <th>Price Range</th>
+          <th>Release Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let movie of recentMovies">
+          <td>
+            <img [src]="getPoster(movie.imdbID)" alt="Poster" class="img-fluid poster-img">
+          </td>
+          <td>{{ movie.imdbID }}</td>
+          <td>{{ movie.languages.join(', ') }}</td>
+          <td>{{ movie.certificate }}</td>
+          <td>{{ movie.priceRange }}</td>
+          <td>{{ movie.releaseDate | date:'MMM dd, yyyy' }}</td>
+        </tr>
+        <tr *ngIf="recentMovies.length === 0">
+          <td colspan="6" class="text-center">No recent movies available.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Recent Bookings Table -->
+  <h4 class="mb-3">Recent Bookings</h4>
+  <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+    <table class="table table-bordered table-hover align-middle">
+      <thead class="table-light sticky-top bg-white">
+        <tr>
+          <th>Customer</th>
+          <th>Movie</th>
+          <th>Theatre</th>
+          <th>Seats</th>
+          <th>Show Time</th>
+          <th>Total Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of recentBookings">
+          <td>{{ booking.customerName }}</td>
+          <td>{{ booking.movieTitle }}</td>
+          <td>{{ booking.theatreName }}</td>
+          <td>{{ booking.seats.join(', ') }}</td>
+          <td>{{ booking.showTime | date:'MMM dd, yyyy h:mm a' }}</td>
+          <td>₹{{ booking.totalAmount }}</td>
+        </tr>
+        <tr *ngIf="recentBookings.length === 0">
+          <td colspan="6" class="text-center">No recent bookings available.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

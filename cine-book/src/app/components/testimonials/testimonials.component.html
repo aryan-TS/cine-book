@@ -1,0 +1,15 @@
+<div class="testimonial-container">
+  <h2>What Our Users Say</h2>
+
+  <div class="testimonial-card">
+    <button class="nav-btn" (click)="previousTestimonial()">&#10094;</button>
+
+    <div class="testimonial-content">
+      <div class="avatar">{{ getInitials(currentTestimonial.name) }}</div>
+      <p class="message">“{{ currentTestimonial.message }}”</p>
+      <p class="name">- {{ currentTestimonial.name }}</p>
+    </div>
+
+    <button class="nav-btn" (click)="nextTestimonial()">&#10095;</button>
+  </div>
+</div>

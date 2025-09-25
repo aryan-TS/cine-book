@@ -1,0 +1,29 @@
+<div class="analytics-page">
+  <h1>Analytics Dashboard</h1>
+
+  <!-- Bar Chart Row -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-12 col-md-8 col-lg-10">
+      <div class="chart-card">
+        <h3>Bar Chart</h3>
+        <canvas baseChart
+                [data]="barChartData"
+                [type]="barChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie Chart Row -->
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="chart-card">
+        <h3>Pie Chart</h3>
+        <canvas baseChart
+                [data]="pieChartData"
+                [type]="pieChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

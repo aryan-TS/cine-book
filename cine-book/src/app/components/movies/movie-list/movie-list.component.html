@@ -1,0 +1,142 @@
+<div class="movie-list-container">
+  <!-- Header Section -->
+  <div class="header-section">
+    <h2 class="heading">Discover Movies</h2>
+    <p class="subtitle">Find your next favorite movie</p>
+  </div>
+
+  <!-- Search and Filter Section -->
+  <div class="search-filter-section">
+    <!-- Search Bar -->
+    <div class="search-container">
+      <div class="search-input-wrapper">
+        <input 
+          type="text" 
+          class="search-input" 
+          placeholder="Search for movies..." 
+          [(ngModel)]="searchQuery"
+          (input)="onSearchInput($event)"
+          (keyup.enter)="performSearch()"
+        />
+        <button class="search-btn" (click)="performSearch()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="M21 21l-4.35-4.35"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filters-container">
+      <div class="filter-group">
+        <label class="filter-label">Genre</label>
+        <select class="filter-select" [(ngModel)]="selectedGenre" (change)="applyFilters()">
+          <option value="">All Genres</option>
+          <option *ngFor="let genre of availableGenres" [value]="genre">{{ genre }}</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Year</label>
+        <select class="filter-select" [(ngModel)]="selectedYear" (change)="applyFilters()">
+          <option value="">All Years</option>
+          <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Rating</label>
+        <select class="filter-select" [(ngModel)]="selectedRating" (change)="applyFilters()">
+          <option value="">All Ratings</option>
+          <option value="9">9+ Stars</option>
+          <option value="8">8+ Stars</option>
+          <option value="7">7+ Stars</option>
+          <option value="6">6+ Stars</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Sort By</label>
+        <select class="filter-select" [(ngModel)]="sortBy" (change)="applyFilters()">
+          <option value="title">Title</option>
+          <option value="year">Year</option>
+          <option value="rating">Rating</option>
+        </select>
+      </div>
+
+      <button class="clear-filters-btn" (click)="clearFilters()">
+        Clear Filters
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Loading movies...</p>
+  </div>
+
+  <!-- No Results State -->
+  <div *ngIf="!isLoading && !filteredMovies?.length" class="no-results">
+    <div class="no-results-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+    </div>
+    <h3>No movies found</h3>
+    <p>Try adjusting your search or filters</p>
+  </div>
+
+  <!-- Results Count -->
+  <div *ngIf="!isLoading && filteredMovies?.length" class="results-info">
+    <p>Showing {{ filteredMovies.length }} of {{ movies.length }} movies</p>
+  </div>
+
+  <!-- Movie Grid -->
+  <div *ngIf="!isLoading && filteredMovies?.length" class="movie-grid">
+    <div class="movie-card" *ngFor="let movie of filteredMovies; trackBy: trackByMovieId">
+      <div class="movie-poster-container">
+        <img 
+          [src]="movie.Poster !== 'N/A' ? movie.Poster : 'assets/placeholder.jpg'" 
+          [alt]="movie.Title"
+          class="movie-poster"
+          (error)="onImageError($event)"
+        />
+        <div class="movie-overlay">
+          <button class="play-btn" (click)="goToDetails(movie.imdbID)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5,3 19,12 5,21"></polygon>
+            </svg>
+          </button>
+        </div>
+        <div class="rating-badge" *ngIf="movie.imdbRating && movie.imdbRating !== 'N/A'">
+          <span>{{ movie.imdbRating }}</span>
+        </div>
+      </div>
+      
+      <div class="movie-details">
+        <h3 class="movie-title" [title]="movie.Title">{{ movie.Title }}</h3>
+        <div class="movie-meta">
+          <span class="year">{{ movie.Year }}</span>
+          <span class="runtime" *ngIf="movie.Runtime && movie.Runtime !== 'N/A'">{{ movie.Runtime }}</span>
+        </div>
+        <p class="movie-genre" *ngIf="movie.Genre && movie.Genre !== 'N/A'">{{ movie.Genre }}</p>
+        <p class="movie-language" *ngIf="movie.Language && movie.Language !== 'N/A'">{{ movie.Language }}</p>
+        
+        <div class="movie-actions">
+          <button class="btn btn-primary" (click)="goToDetails(movie.imdbID)">
+  View Details
+</button>
+
+          <button class="btn btn-secondary" (click)="toggleWatchlist(movie)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

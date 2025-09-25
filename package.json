@@ -1,0 +1,32 @@
+{
+  "name": "cinebook-setup",
+  "version": "1.0.0",
+  "description": "Database setup script for CineBook application",
+  "main": "setup-database.js",
+  "scripts": {
+    "setup-db": "node setup-database.js",
+    "check-db": "node check-database.js",
+    "add-reviews": "node add-test-reviews.js",
+    "setup-atlas": "node setup-atlas-database.js",
+    "check-atlas": "node check-atlas-database.js",
+    "test-atlas": "node test-review-submission.js",
+    "test-fixed": "node test-fixed-api.js",
+    "test-names": "node test-user-names.js",
+    "test-review-saving": "node test-review-saving.js",
+    "test-email": "node test-email.js",
+    "check-users": "node check-users.js",
+    "test-showtime": "node test-showtime-validation.js",
+    "check-email-status": "node check-email-status.js",
+    "test-email-config": "node test-email-config.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.1",
+    "nodemailer": "^7.0.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "1",
+    "title": "Demon Slayer",
+    "genre": "Animation, Action, Sci-Fi",
+    "duration": 181,
+    "releaseDate": "2024-01-15T00:00:00",
+    "rating": 8.4,
+    "poster": "#ff6b35",
+    "description": "The epic conclusion to the Infinity Saga",
+    "status": "active",
+    "bookings": 2847,
+    "revenue": 420000
+  },
+  {
+    "id": "2",
+    "title": "The Dark Knight",
+    "genre": "Action, Crime",
+    "duration": 152,
+    "releaseDate": "2024-02-01T00:00:00",
+    "rating": 9.0,
+    "poster": "#4dabf7",
+    "description": "Batman faces the Joker in this dark masterpiece",
+    "status": "active",
+    "bookings": 1956,
+    "revenue": 280000
+  },
+  {
+    "id": "3",
+    "title": "Inception",
+    "genre": "Sci-Fi, Thriller",
+    "duration": 148,
+    "releaseDate": "2024-03-10T00:00:00",
+    "rating": 8.8,
+    "poster": "#8e44ad",
+    "description": "A skilled thief leads a team into dreams",
+    "status": "active",
+    "bookings": 1670,
+    "revenue": 250000
+  },
+  {
+    "id": "4",
+    "title": "Interstellar",
+    "genre": "Sci-Fi, Drama",
+    "duration": 169,
+    "releaseDate": "2024-04-01T00:00:00",
+    "rating": 8.6,
+    "poster": "#2ecc71",
+    "description": "A journey beyond our galaxy to save humanity",
+    "status": "active",
+    "bookings": 1903,
+    "revenue": 300000
+  },
+  {
+    "id": "5",
+    "title": "Avatar: The Way of Water",
+    "genre": "Adventure, Fantasy",
+    "duration": 162,
+    "releaseDate": "2024-05-20T00:00:00",
+    "rating": 7.9,
+    "poster": "#3498db",
+    "description": "The sequel to the visually stunning Avatar",
+    "status": "upcoming",
+    "bookings": 0,
+    "revenue": 0
+  }
+]

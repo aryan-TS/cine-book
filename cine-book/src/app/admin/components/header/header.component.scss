@@ -1,0 +1,22 @@
+.header {
+  background-color: #252836;
+  color: #fff;
+
+  .title {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .add-movie-btn {
+    background-color: #4f8ef7;
+    color: #fff;
+
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+}

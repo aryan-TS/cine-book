@@ -1,0 +1,39 @@
+<header class="header">
+  <div class="brand" routerLink="/home" style="cursor: pointer">
+    <span class="cine">Cine</span><span class="book">Book</span>
+  </div>
+
+  <div class="profile">
+    <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+      <mat-icon class="profile-icon">account_circle</mat-icon>
+    </button>
+
+    <mat-menu #profileMenu="matMenu">
+      <!-- Not logged in -->
+      <ng-container *ngIf="!isLoggedIn">
+        <button mat-menu-item (click)="onSelectRole('Admin')">
+          <mat-icon>admin_panel_settings</mat-icon>
+          <span>Admin</span>
+        </button>
+        <button mat-menu-item (click)="onSelectRole('User')">
+          <mat-icon>person</mat-icon>
+          <span>User</span>
+        </button>
+      </ng-container>
+
+      <!-- Logged in -->
+      <ng-container *ngIf="isLoggedIn">
+        <button mat-menu-item disabled>
+          <mat-icon *ngIf="role === 'admin'">admin_panel_settings</mat-icon>
+          <mat-icon *ngIf="role === 'user'">person</mat-icon>
+          <span>{{ loggedInName }} ({{ role | titlecase }})</span>
+        </button>
+
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </ng-container>
+    </mat-menu>
+  </div>
+</header>

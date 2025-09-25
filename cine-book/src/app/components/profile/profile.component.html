@@ -1,0 +1,242 @@
+<div class="profile-container">
+  <!-- Role Selector -->
+  <div class="role-switch">
+    <button [class.active]="activeRole === 'user'" (click)="setRole('user')">
+      {{ loggedInUser || "User" }}
+    </button>
+    <button [class.active]="activeRole === 'admin'" (click)="setRole('admin')">
+      Admin
+    </button>
+  </div>
+
+  <!-- Admin Login -->
+  <form
+    *ngIf="activeRole === 'admin'"
+    [formGroup]="adminForm"
+    (ngSubmit)="onAdminLogin()"
+    class="form"
+  >
+    <h3>Admin Login</h3>
+
+    <div class="input-field">
+      <input type="email" placeholder="Email" formControlName="email" />
+    </div>
+    <small
+      class="error"
+      *ngIf="adminForm.get('email')?.touched && adminForm.get('email')?.invalid"
+    >
+      Valid email is required
+    </small>
+
+    <div class="input-field password-field">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        placeholder="Password"
+        formControlName="password"
+      />
+      <span class="toggle" (click)="showPassword = !showPassword"></span>
+    </div>
+    <small
+      class="error"
+      *ngIf="
+        adminForm.get('password')?.touched && adminForm.get('password')?.invalid
+      "
+    >
+      Password is required
+    </small>
+
+    <button type="submit" [disabled]="adminForm.invalid">Login</button>
+  </form>
+
+  <!-- User Login/Register -->
+  <div *ngIf="activeRole === 'user'" class="user-auth">
+    <div class="tabs">
+      <button [class.active]="activeTab === 'login'" (click)="setTab('login')">
+        Login
+      </button>
+      <button
+        [class.active]="activeTab === 'register'"
+        (click)="setTab('register')"
+      >
+        Register
+      </button>
+    </div>
+
+    <!-- User Login -->
+    <form
+      *ngIf="activeTab === 'login'"
+      [formGroup]="userLoginForm"
+      (ngSubmit)="onUserLogin()"
+      class="form"
+    >
+      <h3>User Login</h3>
+
+      <input type="email" placeholder="Email" formControlName="email" />
+      <small
+        class="error"
+        *ngIf="
+          userLoginForm.get('email')?.touched &&
+          userLoginForm.get('email')?.invalid
+        "
+      >
+        Valid email is required
+      </small>
+
+      <div class="input-field password-field">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <span class="toggle" (click)="showPassword = !showPassword"></span>
+      </div>
+      <small
+        class="error"
+        *ngIf="
+          userLoginForm.get('password')?.touched &&
+          userLoginForm.get('password')?.invalid
+        "
+      >
+        Password is required
+      </small>
+
+      <button type="submit" [disabled]="userLoginForm.invalid">Login</button>
+
+      <!-- Forgot Password + Switch to Register -->
+      <div class="switch-text">
+        <a (click)="openForgotPassword()">Forgot Password?</a>
+      </div>
+      <div class="switch-text">
+        Don’t have an account?
+        <a (click)="setTab('register')">Register</a>
+      </div>
+    </form>
+
+    <!-- User Register -->
+    <form
+      *ngIf="activeTab === 'register'"
+      [formGroup]="userRegisterForm"
+      (ngSubmit)="onUserRegister()"
+      class="form"
+    >
+      <h3>Create Account</h3>
+
+      <input type="text" placeholder="Full Name" formControlName="fullName" />
+      <small
+        class="error"
+        *ngIf="
+          userRegisterForm.get('fullName')?.touched &&
+          userRegisterForm.get('fullName')?.invalid
+        "
+      >
+        Full name is required
+      </small>
+
+      <input type="email" placeholder="Email" formControlName="email" />
+      <small
+        class="error"
+        *ngIf="
+          userRegisterForm.get('email')?.touched &&
+          userRegisterForm.get('email')?.invalid
+        "
+      >
+        Valid email is required
+      </small>
+
+      <input type="text" placeholder="Phone Number" formControlName="phone" />
+      <small
+        class="error"
+        *ngIf="
+          userRegisterForm.get('phone')?.touched &&
+          userRegisterForm.get('phone')?.invalid
+        "
+      >
+        Enter valid 10-digit phone number
+      </small>
+
+      <div class="input-field password-field">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <span class="toggle" (click)="showPassword = !showPassword"></span>
+      </div>
+      <small
+        class="error"
+        *ngIf="
+          userRegisterForm.get('password')?.touched &&
+          userRegisterForm.get('password')?.invalid
+        "
+      >
+        Min 8 chars, 1 capital & 1 special required
+      </small>
+
+      <div class="input-field password-field">
+        <input
+          [type]="showConfirmPassword ? 'text' : 'password'"
+          placeholder="Confirm Password"
+          formControlName="confirmPassword"
+        />
+        <span
+          class="toggle"
+          (click)="showConfirmPassword = !showConfirmPassword"
+        ></span>
+      </div>
+      <small class="error" *ngIf="userRegisterForm.hasError('notMatching')">
+        Passwords do not match
+      </small>
+
+      <button type="submit" [disabled]="userRegisterForm.invalid">
+        Create Account
+      </button>
+    </form>
+  </div>
+</div>
+
+<!--  Single Clean Forgot Password Modal -->
+<div *ngIf="showForgotPassword" class="forgot-password-overlay">
+  <div class="forgot-password-modal">
+    <h2>Reset Password</h2>
+    <form [formGroup]="forgotPasswordForm" (ngSubmit)="onForgotPassword()">
+      <div class="input-field password-field">
+        <input
+          [type]="showNewPassword ? 'text' : 'password'"
+          formControlName="newPassword"
+          placeholder="New Password"
+        />
+        <span
+          class="toggle"
+          (click)="showNewPassword = !showNewPassword"
+        ></span>
+      </div>
+
+      <div class="input-field password-field">
+        <input
+          [type]="showConfirmNewPassword ? 'text' : 'password'"
+          formControlName="confirmPassword"
+          placeholder="Confirm Password"
+        />
+        <span
+          class="toggle"
+          (click)="showConfirmNewPassword = !showConfirmNewPassword"
+        ></span>
+      </div>
+
+      <small class="error" *ngIf="forgotPasswordForm.hasError('notMatching')">
+        Passwords do not match
+      </small>
+
+      <div class="btn-group">
+        <button type="submit" class="reset-btn">Reset Password</button>
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="closeForgotPassword()"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

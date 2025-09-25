@@ -1,0 +1,18 @@
+<div class="releases-container">
+  <h2>Upcoming Releases</h2>
+  <div class="card-grid">
+    <mat-card *ngFor="let movie of upcomingMovies" class="release-card">
+      <img [src]="movie.Poster !== 'N/A' ? movie.Poster : 'assets/default-poster.jpg'" 
+           alt="{{ movie.Title }}" class="poster" />
+      <mat-card-content>
+        <h3>{{ movie.Title }}</h3>
+        <p *ngIf="movie.Released && movie.Released !== 'N/A'">
+          {{ movie.Released }}
+        </p>
+        <p *ngIf="!movie.Released || movie.Released === 'N/A'">
+          Coming in 2026
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

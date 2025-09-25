@@ -1,0 +1,62 @@
+[
+  {
+    "id": "BNK2024001",
+    "customerId": "1",
+    "customerName": "John Doe",
+    "movieId": "1",
+    "movieTitle": "Avengers: Endgame",
+    "showTime": "2024-08-05T19:30:00",
+    "seats": ["A12", "A13"],
+    "totalAmount": 480,
+    "status": "confirmed",
+    "bookingDate": "2024-08-05T10:00:00"
+  },
+  {
+    "id": "BNK2024002",
+    "customerId": "2",
+    "customerName": "Jane Smith",
+    "movieId": "2",
+    "movieTitle": "The Dark Knight",
+    "showTime": "2024-08-06T16:30:00",
+    "seats": ["C5", "C6", "C7"],
+    "totalAmount": 720,
+    "status": "confirmed",
+    "bookingDate": "2024-08-04T14:30:00"
+  },
+  {
+    "id": "BNK2024003",
+    "customerId": "3",
+    "customerName": "Alice Johnson",
+    "movieId": "3",
+    "movieTitle": "Inception",
+    "showTime": "2024-08-07T20:00:00",
+    "seats": ["B1", "B2"],
+    "totalAmount": 480,
+    "status": "pending",
+    "bookingDate": "2024-08-06T11:00:00"
+  },
+  {
+    "id": "BNK2024004",
+    "customerId": "4",
+    "customerName": "Bob Williams",
+    "movieId": "4",
+    "movieTitle": "Interstellar",
+    "showTime": "2024-08-08T18:45:00",
+    "seats": ["D10", "D11"],
+    "totalAmount": 500,
+    "status": "confirmed",
+    "bookingDate": "2024-08-07T09:30:00"
+  },
+  {
+    "id": "BNK2024005",
+    "customerId": "5",
+    "customerName": "Emily Davis",
+    "movieId": "5",
+    "movieTitle": "Avatar: The Way of Water",
+    "showTime": "2024-08-09T17:00:00",
+    "seats": ["E5", "E6", "E7"],
+    "totalAmount": 750,
+    "status": "cancelled",
+    "bookingDate": "2024-08-08T15:00:00"
+  }
+]

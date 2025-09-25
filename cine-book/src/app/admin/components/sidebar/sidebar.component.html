@@ -1,0 +1,62 @@
+<nav class="sidebar" [class.open]="open" aria-label="Sidebar navigation">
+  <div class="sidebar-header d-flex align-items-center justify-content-between">
+    <div class="logo">
+      <h2>CineBook</h2>
+    </div>
+
+    <!-- Close button visible on mobile -->
+    <button
+      class="btn btn-link text-light d-md-none me-2"
+      (click)="close.emit()"
+      aria-label="Close sidebar"
+    >
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <ul class="nav flex-column nav-list">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive="active" (click)="navClicked()">
+        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin/theatres" routerLinkActive="active" (click)="navClicked()">
+        <i class="bi bi-building me-2"></i> Theatre
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin/movies" routerLinkActive="active" (click)="navClicked()">
+        <i class="bi bi-film me-2"></i> Movies
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin/shows" routerLinkActive="active" (click)="navClicked()">
+        <i class="bi bi-film me-2"></i> Shows
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin/bookings" routerLinkActive="active" (click)="navClicked()">
+        <i class="bi bi-ticket-perforated me-2"></i> Bookings
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin/customers" routerLinkActive="active" (click)="navClicked()">
+        <i class="bi bi-people me-2"></i> Users
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/admin/analytics" routerLinkActive="active" (click)="navClicked()">
+        <i class="bi bi-graph-up me-2"></i> Analytics
+      </a>
+    </li>
+
+   
+  </ul>
+</nav>

@@ -1,0 +1,18 @@
+<div class="featured-container">
+  <h2>Featured Movies</h2>
+  <div class="card-list">
+    <mat-card *ngFor="let movie of featuredMovies" class="movie-card">
+      <img [src]="movie.posterUrl || 'assets/default-poster.jpg'" 
+           alt="{{ movie.title }}" 
+           class="poster" />
+      <mat-card-content>
+        <h3>{{ movie.title }}</h3>
+        <p>{{ movie.genres }}</p>
+        <div class="rating">
+          <mat-icon>star</mat-icon>
+          <span>{{ movie.rating }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

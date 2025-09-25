@@ -1,0 +1,88 @@
+.payment-container {
+  max-width: 480px;
+  margin: 40px auto;
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 32px 28px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.summary-card {
+  background: #334155;
+  border-radius: 12px;
+  padding: 18px 16px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+.payment-methods {
+  margin-bottom: 32px;
+}
+.methods {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+.pay-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.pay-form input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #475569;
+  background: #222b3a;
+  color: #e2e8f0;
+  font-size: 15px;
+}
+.pay-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.3s;
+}
+.pay-btn:hover {
+  background: linear-gradient(135deg, #059669, #10b981);
+}
+.ticket-success {
+  text-align: center;
+  margin-top: 32px;
+}
+.ticket-card {
+  background: #334155;
+  border-radius: 12px;
+  padding: 20px 16px;
+  margin: 18px 0 28px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  font-size: 15px;
+}
+.home-btn {
+  padding: 12px 28px;
+  background: #475569;
+  color: #e2e8f0;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.home-btn:hover {
+  background: #3b82f6;
+  color: white;
+}

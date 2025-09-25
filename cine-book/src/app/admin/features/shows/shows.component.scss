@@ -1,0 +1,107 @@
+.shows-admin {
+  background-color: #0f1419;
+  color: #e2e8f0;
+  padding: 2rem;
+  border-radius: 12px;
+
+  h2 {
+    color: #3b82f6;
+    margin-bottom: 1rem;
+  }
+
+  .form-section {
+    background: linear-gradient(to bottom right, #1e293b, #334155);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+
+    h3 {
+      margin-bottom: 1rem;
+      color: #06b6d4;
+    }
+
+    label {
+      display: block;
+      margin-top: 0.75rem;
+      margin-bottom: 0.25rem;
+      color: #94a3b8;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid #475569;
+      border-radius: 8px;
+      background-color: #1e293b;
+      color: #e2e8f0;
+      margin-bottom: 1rem;
+
+      &:focus {
+        outline: none;
+        border-color: #3b82f6;
+      }
+    }
+
+    button {
+      margin-right: 0.5rem;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      background: linear-gradient(to right, #3b82f6, #1d4ed8);
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    .cancel-btn {
+      background: #ef4444;
+    }
+  }
+
+  .shows-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .show-card {
+    background: #1e293b;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid #475569;
+
+    h4 {
+      margin-bottom: 0.5rem;
+      color: #8b5cf6;
+    }
+
+    p {
+      margin: 0.25rem 0;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .actions {
+      margin-top: 0.75rem;
+
+      button {
+        margin-right: 0.5rem;
+        padding: 0.5rem 0.8rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+      }
+
+      .edit-btn {
+        background: #10b981;
+      }
+
+      .delete-btn {
+        background: #ef4444;
+      }
+    }
+  }
+}

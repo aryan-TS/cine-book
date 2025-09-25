@@ -1,0 +1,42 @@
+# Node
+node_modules/
+.npmrc
+
+# Builds
+build/
+dist/
+.tmp/
+tmp/
+.out/
+
+# Angular / Frontend
+.angular/
+coverage/
+.cypress/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS/Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+# Env/Secrets
+.env
+.env.*
+backend_cine-book/.env
+
+# Misc
+*.local
+*.lock-wscript
+
+# Windows shortcuts accidentally committed
+*.lnk

@@ -1,0 +1,42 @@
+<div class="container bookings-page py-4">
+  <h2 class="mb-4">Bookings Management</h2>
+
+  <!-- Search -->
+  <div class="mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search by customer or movie..."
+      [(ngModel)]="searchTerm"
+      (input)="applyFilter()"
+    />
+  </div>
+
+  <!-- Bookings Table -->
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Customer</th>
+          <th>Movie</th>
+          <th>Seats</th>
+          <th>Booking Date</th>
+          <th>Show Time</th>
+          <th>Total (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of filteredBookings">
+          <td>{{ booking._id }}</td>
+          <td>{{ booking.customerName }}</td>
+          <td>{{ booking.movieTitle }}</td>
+          <td>{{ booking.seats.join(', ') }}</td>
+          <td>{{ booking.bookingDate | date:'mediumDate' }}</td>
+          <td>{{ booking.showTime | date:'medium' }}</td>
+          <td>{{ booking.totalAmount }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
