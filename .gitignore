@@ -34,6 +34,10 @@ Thumbs.db
 .env.*
 backend_cine-book/.env
 
+# Allow committing sample env files
+!*.env.example
+!**/.env.example
+
 # Misc
 *.local
 *.lock-wscript
