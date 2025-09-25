@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "cine-book/package.json", "use": "@vercel/static-build", "config": { "distDir": "dist/cine-book" } },
+    { "src": "backend_cine-book/api/[...all].js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "backend_cine-book/api/[...all].js" },
+    { "src": "/(.*)", "dest": "cine-book/dist/cine-book/index.html" }
+  ]
+}
